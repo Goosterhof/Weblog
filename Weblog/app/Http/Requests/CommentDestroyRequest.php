@@ -27,4 +27,14 @@ class CommentDestroyRequest extends FormRequest
         'id' => 'required',
       ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [];
+    }
 }

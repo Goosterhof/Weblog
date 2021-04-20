@@ -50,10 +50,6 @@ class PostController extends Controller
    // Backend layout
    public function post(\App\Models\User $user, \App\Models\Post $post, \App\Models\Category $category, Request $request)
    {
-     $test =  Post::all()->where('user_id', Auth::id())->first()->categories()->pluck('category_id')->toArray();
-
-     // dd($test);
-
      return view('backend.posts.posts', [
        'post' => Post::where('user_id', Auth::id())->latest()->paginate(10),
        'category' => Category::latest()->get(),

@@ -23,8 +23,6 @@ class UserDestroyRequest extends FormRequest
      */
     public function rules()
     {
-      return [
-        'id' => 'required',
-      ];
+      return [];
     }
 }

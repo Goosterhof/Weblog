@@ -9,8 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\{CategoryStoreRequest, CategoryUpdateRequest, CategoryDestroyRequest};
 use App\Models\Category;
 
-
-
 class CategoryController extends Controller
 {
   public function index(Request $request)
@@ -34,6 +32,8 @@ class CategoryController extends Controller
        'category' => Category::latest()->paginate(20),
       ]);
     }
+
+    
     public function store(CategoryStoreRequest $request)
     {
       Category::create($validated = $request->validated());

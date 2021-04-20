@@ -29,4 +29,13 @@ class UserPassRequest extends FormRequest
         'new_password' => 'sometimes|required',
       ];
     }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [];
+    }
 }

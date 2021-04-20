@@ -30,4 +30,14 @@ class UserPremiumRequest extends FormRequest
         'premium' => 'required',
       ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [];
+    }
 }

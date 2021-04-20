@@ -32,9 +32,11 @@
            <label>Category</label>
              <select class="form-select" multiple aria-label="multiple select example" name="categories[]" multiple>
                @foreach($category as $cat)
-                 <option value="{{$cat->id}}" {{ in_array($cat->id, $posts) ? ' selected' : '' }} >
-                   {{$cat->name}}
-                 </option>
+                @if ($category)
+                <option value="{{$cat->id}}" {{ in_array($cat->id, $posts) ? ' selected' : '' }} >
+                  {{$cat->name}}
+                </option>
+               @endif
                @endforeach
            </select>
          </div>

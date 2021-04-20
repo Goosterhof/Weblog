@@ -16,22 +16,13 @@ class UserController extends Controller
   {
       $this->middleware('auth');
   }
-
   public function index(Request $request)
   {
     return view('dashboard');
   }
-
-
   public function premium(Request $request)
   {
-
-    // dd(User::where('id', Auth::user()->id)->first());
-
     return view('backend.dashboard.premium');
-
-
-
   }
 
 
@@ -53,10 +44,7 @@ class UserController extends Controller
     User::where('id', Auth::user()->id)->first()->update( [
       'premium' => $request->input('premium')
     ]);
-
-   // return redirect()->back()->with('success', 'Category successfully removed!');
    return redirect()->route('dashboard.index')->with('success', 'You have a subscription to premium now');
-
   }
 
   public function pass(UserPassRequest $request, \App\Models\User $user)
