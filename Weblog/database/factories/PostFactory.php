@@ -2,9 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -31,7 +28,7 @@ class PostFactory extends Factory
              'media_name' => $this->faker->text(20),
              'media_path' => $this->faker->imageUrl(640,480),
 
-             'user_id'=> User::factory(),
+             'user_id'=> \App\Models\User::factory(),
           ];
      }
 }

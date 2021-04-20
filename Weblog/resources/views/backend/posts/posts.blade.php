@@ -20,14 +20,14 @@
    @endforeach
    @endif
    @include('backend.posts.add')
-   @foreach ($post as $key)
+   @forelse ($post as $key)
    <article class="blog-post">
       <div class="row">
          <div class="col">
             <h2 class="blog-post-title">{{$key->title}}</h2>
          </div>
          <div class="col-md-1 float-end">
-            <button type="button" class="btn float-end btn-primary btn-sm text-light" data-bs-toggle="modal" data-bs-target="#edit_post_{{ 'post', $key->id }}" >Edit</button>
+            <a href="{{ route('post.edit',  ['edit' => $key->id] )}}" class="btn float-end btn-primary btn-sm text-light">Edit</a>
          </div>
          <div class="col-md-1 float-end">
             <form method="POST" action="{{ route('post.destroy', $key->id) }}">
@@ -47,8 +47,10 @@
       <p class=""><a href="/post/{{$key->id}}" class="fw-bold">Continue reading...</a></p>
       <hr>
    </article>
-   @endforeach
-   @include('backend.posts.edit')
+   @empty
+   <p>No posts yet...</p>
+
+   @endforelse
    <nav class="blog-pagination" aria-label="Pagination">
       {{ $post->links() }}
    </nav>

@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\{Hash, Auth};
 use App\Http\Requests\{UserPassRequest, UserAccountRequest, UserDestroyRequest, UserPremiumRequest};
 
 class UserController extends Controller
 {
-
   public function __construct()
   {
       $this->middleware('auth');
@@ -25,20 +22,16 @@ class UserController extends Controller
     return view('backend.dashboard.premium');
   }
 
-
   public function account(UserAccountRequest $request, \App\Models\User $user)
   {
-    $request->user()->fill([
+    $request->user()->update([
       'name' => $request->input('name'),
       'email' => $request->input('email'),
       'bio' => $request->input('bio'),
       'newsletter' => $request->input('newsletter'),
-    ])->save();
+    ]);
     return redirect()->back()->with('success', 'Account successfully updated!');
   }
-
-
-
   public function pay(UserPremiumRequest $request, \App\Models\User $user)
   {
     User::where('id', Auth::user()->id)->first()->update( [
@@ -49,9 +42,9 @@ class UserController extends Controller
 
   public function pass(UserPassRequest $request, \App\Models\User $user)
   {
-    $request->user()->fill([
+    $request->user()->update([
         'password' => Hash::make($request->new_password)
-    ])->save();
+    ]);
 
     return redirect()->back()->with('success', 'password successfully updated!');
   }

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class newsletter extends Mailable
+class NewsLetterEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class newsletter extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mail.newsletter');
     }
 }

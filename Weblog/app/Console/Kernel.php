@@ -24,7 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+      $newsUser = \App\Models\User::all()->where('newsletter', '1');
+
+      foreach ($newsUser as $user) {
+          $schedule->job(new \App\Mail\NewsLetterEmail($user))->weeklyOn(1, '8:00');
+      }
     }
 
     /**

@@ -33,7 +33,6 @@ class CategoryController extends Controller
       ]);
     }
 
-    
     public function store(CategoryStoreRequest $request)
     {
       Category::create($validated = $request->validated());

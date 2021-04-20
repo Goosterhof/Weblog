@@ -52,10 +52,15 @@ $router->group(['middleware' => ['auth']], function($router) {
 
 $router->group(['middleware' => ['author']], function() {
     Route::get('/dashboard/cat', [CategoryController::class, 'category'])->name('cat.index');
-      Route::resource('/dashboard/cat', CategoryController::class,
-        ['only' => ['store', 'update', 'destroy']]
-      );
+    Route::resource('/dashboard/cat', CategoryController::class,
+      ['only' => ['store', 'update', 'destroy']]
+    );
+
+
+
     Route::get('/dashboard/post', [PostController::class, 'post'])->name('post.post');
+    Route::get('dashboard/post/{edit}', [PostController::class, 'edit'])->name('post.edit');
+
 
 
       Route::resource('/dashboard/post', PostController::class,
