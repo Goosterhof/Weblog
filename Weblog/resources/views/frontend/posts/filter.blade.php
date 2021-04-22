@@ -21,7 +21,8 @@
            </div>
 
            <div class="col float-end">
-            <form action="{{ route('post.index') }}" method="GET" role="category">
+            <form action="{{ route('post.index') }}" method="GET" role="category" id="category">
+              <meta name="csrf-token" content="{{ csrf_token() }}">
                <div class="col">
                   <select class="form-select" aria-label="select" onchange="this.options [this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                      <option selected class="bottom-border">Select a category</option>
@@ -61,24 +62,13 @@
    </div>
 </div>
 
+
 <script type="text/javascript">
-export default {
-
-    data(){
-        return {
-          newPost: ''
-        }
-    },
-    methods: {
-        addNewPost(){
-
-            axios.post('/post',{title: this.newPost, user_id:userId})
-            .then((response)=>{
-
-            $('#success').html(response.data.message)
-
-            })
-        }
-    }
-}
+    // send contact form data.
+    axios.get('/post',{cat:''
+    }).then((response)=>{
+        console.log(response)
+    }).catch((error)=>{
+        console.log(error.response.data)
+    });
 </script>

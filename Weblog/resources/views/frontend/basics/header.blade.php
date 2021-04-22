@@ -14,10 +14,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="Dropdown1">
                <li class="nav-item">
-               <li class="nav-item">
-                  <a class="nav-link" href="/categories">All Categories</a>
-               </li>
                <a class="nav-link" href="/post">All Posts</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="/categories">All Categories</a>
                </li>
             </ul>
          </div>

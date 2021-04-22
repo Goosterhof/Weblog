@@ -1,7 +1,6 @@
 @extends('dashboard')
 @section('content')
-<div class="row w-25 m-auto">
-  <div class="col">
+<main class="form-signin">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -48,6 +47,5 @@
             </x-button>
         </div>
     </form>
-  </div>
-</div>
+</main>
 @endsection

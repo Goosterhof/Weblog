@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
       $newsUser = \App\Models\User::all()->where('newsletter', '1');
 
       foreach ($newsUser as $user) {
-          $schedule->job(new \App\Mail\NewsLetterEmail($user))->weeklyOn(1, '8:00');
+          $schedule->job(new \App\Mail\NewsLetterEmail($user))->everyFiveMinutes();
       }
     }
 

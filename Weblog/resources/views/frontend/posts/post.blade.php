@@ -12,7 +12,13 @@
    </div>
 </div>
 @endif
-
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<div class="alert alert-danger" role="alert">
+   <p class="m-0">{{ $error }}</p>
+</div>
+@endforeach
+@endif
 
 <div class="container-fluid">
 <div class="row md-2 pb-5 ">

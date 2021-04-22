@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('content')
-<div class="row w-25 m-auto">
-  <div class="col">
+<main class="form-signin">
+
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -51,7 +51,5 @@
             </x-button>
         </div>
     </form>
-    </div>
-  </div>
-
+</main>
 @endsection
