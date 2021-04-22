@@ -6,7 +6,7 @@ use Bouncer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Hash, Auth};
-use App\Http\Requests\{UserPassRequest, UserAccountRequest, UserDestroyRequest, UserPremiumRequest};
+use App\Http\Requests\{UserPassRequest, UserAccountRequest, UserDestroyRequest, UserPremiumRequest, UserUnsubscribeRequest};
 
 class UserController extends Controller
 {
@@ -34,6 +34,9 @@ class UserController extends Controller
     ]);
     return redirect()->back()->with('success', 'Account successfully updated!');
   }
+
+
+
   public function pay(UserPremiumRequest $request, \App\Models\User $user)
   {
     User::where('id', Auth::user()->id)->first()->update( [
@@ -41,6 +44,20 @@ class UserController extends Controller
     ]);
    return redirect()->route('dashboard.index')->with('success', 'You have a subscription to premium now');
   }
+
+
+
+
+  public function unsubscribe(UserUnsubscribeRequest $request, \App\Models\User $user)
+  {
+    User::where('id', Auth::user()->id)->first()->update( [
+      'premium' => $request->input('unsubscribe')
+    ]);
+    return redirect()->back()->with('success', 'Unsubscribed!');
+  }
+
+
+
 
   public function pass(UserPassRequest $request, \App\Models\User $user)
   {

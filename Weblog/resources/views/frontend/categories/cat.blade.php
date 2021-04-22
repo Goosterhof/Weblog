@@ -13,8 +13,7 @@
 <div class="row">
   <div class="col">
 
-    @auth
-    @forelse ($catpostPremium as $key)
+    @forelse ($category_post as $key)
       <article class="blog-post">
         <div class="row">
          <div class="col-10">
@@ -45,11 +44,10 @@
 
     @endforelse
 
-    @endauth
 
 
 
-    @forelse ($category_post as $key)
+    @forelse ($category_post_1 as $key)
     <article class="blog-post">
       <div class="row">
         <div class="col">

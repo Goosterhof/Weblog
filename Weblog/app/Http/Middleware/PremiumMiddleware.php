@@ -13,6 +13,28 @@ class PremiumMiddleware
 {
   public function handle(Request $request, Closure $next)
   {
-    
+    if (!Auth::user()) {
+      view()->composer('/post', function ($view) {
+        $view->with( 'premium', Post::where('is_premium', '0')->first()->paginate(10) );
+      });
+      view()->composer('frontend.categories.cat', function ($cat) {
+        $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '0') );
+      });
+    } elseif (Auth::user()->premium == '1') {
+      view()->composer('/post', function ($view) {
+        $view->with( 'premium', Post::where('is_premium', '1')->first()->paginate(10) );
+      });
+      view()->composer('frontend.categories.cat', function ($cat) {
+        $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '1') );
+      });
+    } elseif (Auth::user()->premium == '0') {
+      view()->composer('/post', function ($view) {
+        $view->with( 'premium', Post::where('is_premium', '0')->first()->paginate(10) );
+      });
+      view()->composer('frontend.categories.cat', function ($cat) {
+        $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '0') );
+      });
+    }
+  return $next($request);
   }
 }

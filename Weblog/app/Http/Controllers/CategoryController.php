@@ -20,16 +20,10 @@ class CategoryController extends Controller
    }
    public function show(Request $request)
    {
-     $premium = Post::when( Auth::check() && Auth::user()->premium == 1,
-       function () {
-         return Post::where('is_premium', '1')->get();
-       });
-
      if ( $request->query('id') ) {
        return view('frontend.categories.cat', [
          'category' => Category::where('id', $request->query('id'))->first(),
-         'category_post' => Category::where('id', $request->query('id'))->first()->posts->where('is_premium', '0'),
-         'catpostPremium' => Category::where('id', $request->query('id'))->first()->posts->where('is_premium', '1')
+         'category_post_1' => Category::where('id', $request->query('id'))->first()->posts->where('is_premium', '0'),
        ]);
      }
    }

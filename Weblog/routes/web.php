@@ -21,19 +21,26 @@ require __DIR__.'/auth.php';
 // routes for home.
 Route::get('', [HomeController::class,'index'])->name('home.index');
 
-// routes for posts.
-Route::get('/post', [PostController::class,'index'])->name('post.index');
-Route::get('/post/{post}', [PostController::class,'show'])->name('post.show');
-Route::get('/post/search', [PostController::class,'search'])->name('post.search');
 
-// routes for Category.
-Route::get('/categories', [CategoryController::class,'index'])->name('category.index');
-Route::get('/categories/cat', [CategoryController::class,'show'])->name('category.show');
 
-// routes for comments.
-Route::post('/post', [CommentController::class, 'store'])->name('comment.store');
-Route::delete('/post', [CommentController::class, 'destroy'])->name('comment.destroy');
 
+
+
+$router->group(['middleware' => ['premium']], function() {
+  // routes for posts.
+  Route::get('/post', [PostController::class,'index'])->name('post.index');
+  Route::get('/post/{post}', [PostController::class,'show'])->name('post.show');
+  Route::get('/post/search', [PostController::class,'search'])->name('post.search');
+
+  // routes for Category.
+  Route::get('/categories', [CategoryController::class,'index'])->name('category.index');
+  Route::get('/categories/cat', [CategoryController::class,'show'])->name('category.show');
+
+  // routes for comments.
+  Route::post('/post', [CommentController::class, 'store'])->name('comment.store');
+  Route::delete('/post', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+});
 
 
 
@@ -48,6 +55,7 @@ $router->group(['middleware' => ['auth']], function($router) {
   // to get premium.
   Route::get('premium', [UserController::class, 'premium'])->name('user.premium');
   Route::patch('premium/pay', [UserController::class, 'pay'])->name('user.pay');
+  Route::patch('dashboard', [UserController::class, 'unsubscribe'])->name('user.unsubscribe');
 
 
 

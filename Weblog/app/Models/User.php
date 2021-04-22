@@ -29,7 +29,6 @@ class User extends Authenticatable
       'newsletter',
       'premium',
       'password',
-      'role_id',
     ];
 
     /**
