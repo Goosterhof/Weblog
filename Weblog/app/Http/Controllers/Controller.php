@@ -6,6 +6,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\{User, Post, Comment, Category};
+use Illuminate\Support\Facades\{Auth, Storage, Session, File};
+
+
 
 class Controller extends BaseController
 {

@@ -14,13 +14,11 @@
     </a>
   </div>
 </div>
-
 <div class="row">
   <div class="col">
     @include('frontend.posts.filter')
   </div>
 </div>
-
 @if (Request::has('term'))
 <div class="row w-75 m-auto border p-3 mb-4">
   <div class="col">
@@ -32,11 +30,26 @@
           <div class="col">
             <h6 class="m-0"><strong>{{$key->title}}</strong></h6>
             </div>
+
+
+
             <div class="col text-end">
-              <p class="blog-post-meta m-0 text-rigth"><small>{{ $key->created_at }} by {{ $key->user_id }}</small></p>
+              <div class="mb-1 text-muted"> {{ $key->created_at }} by {{$key->user->name}}
+                <span>
+                @if ($key->is_premium == 1)
+                  <div class="badge bg-success float-end text-wrap" style="width: 6rem;">
+                    premium
+                  </div>
+
+                @else
+                  <div class="badge text-danger float-end text-wrap" >
+                    <p>basic</p>
+                  </div>
+                @endif
+              </span>
+              </div>
             </div>
             <hr>
-        </div>
 
         <p class="m-0"><small>{{ substr(strip_tags($key->body), 0, 150) }}</small></p>
         <a class="small" href="/post/{{$key->id}}">Read more...</a>
@@ -47,6 +60,10 @@
   </div>
 </div>
 @endif
+
+
+
+
 
 
 @if (Request::has('cat'))
@@ -61,7 +78,20 @@
             <h6 class="m-0"><strong>{{$key->title}}</strong></h6>
             </div>
             <div class="col text-end">
-              <p class="blog-post-meta m-0 text-rigth"><small>{{ $key->created_at }} by {{ $key->user_id }}</small></p>
+              <div class="mb-1 text-muted"> {{ $key->created_at }} by {{$key->user->name}}
+                <span>
+                @if ($key->is_premium == 1)
+                  <div class="badge bg-success float-end text-wrap" style="width: 6rem;">
+                    premium
+                  </div>
+
+                @else
+                  <div class="badge text-danger float-end text-wrap" >
+                    <p>basic</p>
+                  </div>
+                @endif
+              </span>
+              </div>
             </div>
             <hr>
         </div>
@@ -76,20 +106,62 @@
 </div>
 @endif
 
+  @foreach ($premium as $key)
+    <article class="blog-post">
+      <div class="row">
+       <div class="col-10">
+        <h2 class="blog-post-title">{{$key->title}}</h2>
+      </div>
+      <div class="col-2">
+        @if ($key->is_premium == 1)
+        <div class="badge bg-success float-end text-wrap" style="width: 6rem;">
+          premium
+        </div>
 
-@foreach ($post as $key)
-  <article class="blog-post">
-    <h2 class="blog-post-title">{{$key->title}}</h2>
-    <p class="blog-post-meta">{{ $key->created_at }} by {{ $key->user_id }}</p>
+        @else
+        <div class="badge text-danger float-end text-wrap" >
+        <p>basic</p>
+      </div>
+        @endif
+      </div>
+      <div class="mb-1 text-muted">{{ $key->created_at }} by  {{$key->user->name}}</div>
+    </div>
     <p class="pb-3">{{ substr(strip_tags($key->body), 0, 750) }}</p>
     <a class="text-primary" href="/post/{{$key->id}}">Read more...</a>
-  </article><!-- /.blog-post -->
-  <hr>
+    </article><!-- /.blog-post -->
+    <hr>
+  @endforeach
+
+@foreach ($post as $key)
+    <article class="blog-post">
+      <div class="row">
+       <div class="col-10">
+        <h2 class="blog-post-title">{{$key->title}}</h2>
+      </div>
+      <div class="col-2">
+        @if ($key->is_premium == 1)
+        <div class="badge bg-success float-end text-wrap" style="width: 6rem;">
+          premium
+        </div>
+
+        @else
+        <div class="badge text-danger float-end text-wrap" >
+        <p>basic</p>
+      </div>
+        @endif
+      </div>
+      <div class="mb-1 text-muted">{{ $key->created_at }} by  {{$key->user->name}}</div>
+    </div>
+    <p class="pb-3">{{ substr(strip_tags($key->body), 0, 750) }}</p>
+    <a class="text-primary" href="/post/{{$key->id}}">Read more...</a>
+    </article><!-- /.blog-post -->
+    <hr>
 @endforeach
 
-<nav class="blog-pagination" aria-label="Pagination">
- {{ $post->links() }}
-</nav>
+
+
+
+<nav class="blog-pagination" aria-label="Pagination">{{ $post->links() }}</nav>
 
 
 

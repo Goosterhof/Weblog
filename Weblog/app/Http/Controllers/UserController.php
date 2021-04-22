@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Bouncer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Hash, Auth};
@@ -9,11 +10,13 @@ use App\Http\Requests\{UserPassRequest, UserAccountRequest, UserDestroyRequest, 
 
 class UserController extends Controller
 {
+  // use HasRolesAndAbilities;
+
   public function __construct()
   {
       $this->middleware('auth');
   }
-  public function index(Request $request)
+  public function index(Request $request, \App\Models\User $user)
   {
     return view('dashboard');
   }
@@ -21,7 +24,6 @@ class UserController extends Controller
   {
     return view('backend.dashboard.premium');
   }
-
   public function account(UserAccountRequest $request, \App\Models\User $user)
   {
     $request->user()->update([

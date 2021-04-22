@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, PostController, CategoryController, CommentController, UserController};
-use App\Http\Middleware\{Authenticate, AuthorMiddleware};
+use App\Http\Middleware\{Authenticate, AuthorMiddleware, PremiumMiddleware};
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,9 @@ Route::get('/categories/cat', [CategoryController::class,'show'])->name('categor
 // routes for comments.
 Route::post('/post', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/post', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+
+
 
 // Routes for logged in users.
 $router->group(['middleware' => ['auth']], function($router) {

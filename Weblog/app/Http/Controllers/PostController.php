@@ -10,7 +10,7 @@ use App\Models\{User, Post, Comment, Category};
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, \App\Models\Post $post)
     {
         $search = Post::query();
         if (request('term')) {
@@ -21,11 +21,20 @@ class PostController extends Controller
             $cat->where('id', 'Like', '%' . request('cat') . '%');
         }
 
+        $premium = Post::when( Auth::check() && Auth::user()->premium,
+          function () {
+            if (true) {
+              return Post::where('is_premium', '1')->get();
+            } 
+          });
+
         return view('posts', [
-            'post' => Post::latest()->paginate(10),
+            'post' => Post::where('is_premium', '0')->latest()->paginate(10),
+            'premium' => $premium,
             'category' => Category::latest()->get(),
+            'user' => User::where('id', $post->user_id)->get(),
             'search' => $search->orderBy('id', 'DESC')->paginate(5),
-            'cat' => $cat->orderBy('id', 'DESC')->first()->posts,
+            'cat' => $cat->orderBy('id', 'DESC')->first()->posts->where('is_premium', '0'),
             'cat_name' => Category::where('id', request('cat'))->first(), // for the naminng of the query.
         ]);
     }

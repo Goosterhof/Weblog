@@ -3,13 +3,10 @@
 @include('frontend.basics.header')
 @include('frontend.basics.menu')
 @include('frontend.home.featured')
-  <div class="row mb-2">
-    <div class="col-md-8">
+  <div class="row">
+    <div class="col">
       @include('frontend.home.blogpost')
     </div>
-  <div class="col-md-4">
-    @include('frontend.home.sidebar')
-  </div>
 </div>
 @include('frontend.basics.footer')
 </main>

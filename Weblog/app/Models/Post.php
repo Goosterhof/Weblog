@@ -16,6 +16,11 @@ class Post extends Model
 
     protected $touches = ['categories'];
 
+    protected $casts = [
+      'is_premium' => 'boolean',
+    ];
+
+
     protected $fillable = [
       'id',
       'title',

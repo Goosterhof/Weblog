@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\{CategoryStoreRequest, CategoryUpdateRequest, CategoryDestroyRequest};
-use App\Models\Category;
+use App\Models\{Category, Post};
 
 class CategoryController extends Controller
 {
@@ -19,10 +20,16 @@ class CategoryController extends Controller
    }
    public function show(Request $request)
    {
+     $premium = Post::when( Auth::check() && Auth::user()->premium == 1,
+       function () {
+         return Post::where('is_premium', '1')->get();
+       });
+
      if ( $request->query('id') ) {
        return view('frontend.categories.cat', [
          'category' => Category::where('id', $request->query('id'))->first(),
-         'category_post' => Category::where('id', $request->query('id'))->first()->posts,
+         'category_post' => Category::where('id', $request->query('id'))->first()->posts->where('is_premium', '0'),
+         'catpostPremium' => Category::where('id', $request->query('id'))->first()->posts->where('is_premium', '1')
        ]);
      }
    }
