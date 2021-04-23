@@ -25,7 +25,7 @@ class PostController extends Controller
           function () {
             if (true) {
               return Post::where('is_premium', '1')->get();
-            } 
+            }
           });
 
         return view('posts', [
@@ -33,8 +33,10 @@ class PostController extends Controller
             'premium' => $premium,
             'category' => Category::latest()->get(),
             'user' => User::where('id', $post->user_id)->get(),
-            'search' => $search->orderBy('id', 'DESC')->paginate(5),
+
+            'search' => $search->where('is_premium', '0')->orderBy('id', 'DESC')->paginate(4),
             'cat' => $cat->orderBy('id', 'DESC')->first()->posts->where('is_premium', '0'),
+
             'cat_name' => Category::where('id', request('cat'))->first(), // for the naminng of the query.
         ]);
     }
