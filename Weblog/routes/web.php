@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController, PostController, CategoryController, CommentController, UserController};
+use App\Http\Controllers\{
+    HomeController,
+    PostController,
+    CategoryController,
+    CommentController,
+    UserController,
+    FilterController
+  };
 use App\Http\Middleware\{Authenticate, AuthorMiddleware, PremiumMiddleware};
 
 /*
@@ -30,7 +37,14 @@ $router->group(['middleware' => ['premium']], function() {
   // routes for posts.
   Route::get('/post', [PostController::class,'index'])->name('post.index');
   Route::get('/post/{post}', [PostController::class,'show'])->name('post.show');
-  Route::get('/post/search', [PostController::class,'search'])->name('post.search');
+
+  // filter
+  Route::get('/post/{search}', [FilterController::class,'search'])->name('filter.search');
+  Route::get('/post/{order}', [FilterController::class,'order'])->name('filter.order');
+  Route::get('/post/{category}', [FilterController::class,'category'])->name('filter.category');
+
+
+
 
   // routes for Category.
   Route::get('/categories', [CategoryController::class,'index'])->name('category.index');

@@ -24,9 +24,9 @@ class PremiumMiddleware
       view()->composer('/post', function ($view) {
         $view->with( 'premium', Post::where('is_premium', '0')->first()->paginate(10) );
       });
-      view()->composer('frontend.posts.filter', function ($sear) {
-        $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
-      });
+      // view()->composer('frontend.posts.filter', function ($sear) {
+      //   $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
+      // });
       view()->composer('frontend.categories.cat', function ($cat) {
         $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '0') );
       });
@@ -34,9 +34,9 @@ class PremiumMiddleware
       view()->composer('/post', function ($view) {
         $view->with( 'premium', Post::where('is_premium', '1')->first()->paginate(10) );
       });
-      view()->composer('frontend.posts.filter', function ($sear) {
-        $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
-      });
+      // view()->composer('frontend.posts.filter', function ($sear) {
+      //   $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
+      // });
       view()->composer('frontend.categories.cat', function ($cat) {
         $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '1') );
       });
@@ -44,9 +44,9 @@ class PremiumMiddleware
       view()->composer('/post', function ($view) {
         $view->with( 'premium', Post::where('is_premium', '0')->first()->paginate(10) );
       });
-      view()->composer('frontend.posts.filter', function ($sear) {
-        $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
-      });
+      // view()->composer('frontend.posts.filter', function ($sear) {
+      //   $sear->with( 'search', $search->orderBy('id', 'DESC')->paginate(4) );
+      // });
       view()->composer('frontend.categories.cat', function ($cat) {
         $cat->with( 'category_post', Category::where('id', Request()->query('id'))->first()->posts->where('is_premium', '0') );
       });

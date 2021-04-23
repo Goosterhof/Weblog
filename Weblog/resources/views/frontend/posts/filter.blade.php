@@ -5,7 +5,9 @@
 
 
            <div class="col-6">
-             <form action="{{ route('post.index') }}" method="GET" role="search">
+             <form action="{{ route('filter.search', 'search') }}" method="GET" role="search">
+               @csrf
+               @method('GET')
                 <div class="input-group">
                    <input type="text" class="form-control @error('search') is-invalid @enderror mr-2" name="term" placeholder="Search projects" id="term" required>
                    @error('search')
@@ -21,17 +23,23 @@
            </div>
 
            <div class="col float-end">
-            <form action="{{ route('post.index') }}" method="GET" role="category" id="category">
-              <meta name="csrf-token" content="{{ csrf_token() }}">
+            <form action="{{ route('filter.category', 'category') }}" method="GET" role="category">
+              @csrf
+              @method('GET')
+
+
                <div class="col">
-                  <select class="form-select" aria-label="select" onchange="this.options [this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                     <option selected class="bottom-border">Select a category</option>
-                     <hr>
-                     @foreach($category as $cat)
-                     <option value="/post?cat={{ $cat->id }}">
-                        {{ $cat->name }}
-                     </option>
-                     @endforeach
+                  <select class="form-select"
+                          aria-label="select"
+                          onchange="this.options [this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" >
+
+                         <option selected class="bottom-border">Select a category</option>
+
+                         @foreach($category as $cat)
+                         <option value="?category={{ $cat->id }}">{{ $cat->name }}</option>
+                         @endforeach
+
+
                   </select>
                </div>
             </form>
@@ -39,13 +47,21 @@
 
 
             <div class="col float-end">
-              <form action="{{ route('post.index') }}" method="GET" role="time">
-                 <div class="col">
-                    <select class="form-select" aria-label="select" onchange="this.options [this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                      <option value="">Choose</option>
-                      <option value="/post?order=DESC">Descending</option>
-                       <option value="/post?order=ASC">Ascending</option>
+              <form action="{{ route('filter.order', 'order') }}" method="GET" role="time">
+                   @csrf
+                   @method('GET')
+
+                   <div class="col">
+                    <select class="form-select"
+                            aria-label="select"
+                            onchange="this.options [this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" >
+
+                      <option selected value="">Choose</option>
+                      <option value="?order=DESC ">Descending</option>
+                      <option value="?order=ASC ">Ascending</option>
                     </select>
+
+
                  </div>
               </form>
             </div>
@@ -63,12 +79,9 @@
 </div>
 
 
-<script type="text/javascript">
-    // send contact form data.
-    axios.get('/post',{cat:''
-    }).then((response)=>{
-        console.log(response)
-    }).catch((error)=>{
-        console.log(error.response.data)
-    });
+<script>
+
+
+
+
 </script>
