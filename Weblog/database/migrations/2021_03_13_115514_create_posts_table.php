@@ -30,7 +30,7 @@ class CreatePostsTable extends Migration
         $table->boolean('is_premium')->default(0);
 
         $table->integer('user_id')->unsigned();
-        $table->foreign('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
+        $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
   			$table->timestamps();
   		});

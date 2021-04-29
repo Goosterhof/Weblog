@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\NewsLetterEmail;
+use Illuminate\fasades\Email;
 
 class MailController extends Controller
 {
   public function sendNewsLetter()
   {
-      $email = 'test@gmail.com';
+    $newsUser = \App\Models\User::all()->where('newsletter', '1');
 
-      $offer = [
-          'title' => 'Deals of the Day',
-          'url' => 'https://www.remotestack.io'
-      ];
 
-      Mail::to($email)->send(new OfferMail($offer));
 
-      dd("Mail sent!");
+    foreach ($newsUser as $user) {
+
+      dd($user->email);
+      
+      Mail::to($user->email)->send(new NewsLetterEmail($latestNews));
+
+    }
   }
 }

@@ -26,7 +26,8 @@ class CommentStoreRequest extends FormRequest
       return [
         'title' => 'required',
         'body' => 'required',
-        'post_id' => 'required'
+        'post_id' => 'required',
+        'user_id' => 'required',
       ];
     }
 

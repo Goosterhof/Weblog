@@ -19,8 +19,6 @@ class UserSeeder extends Seeder
     {
       User::factory()->count(10)->create();
 
-
-
       // Create Author user
       User::create([
        'name' => 'Author',
@@ -29,7 +27,8 @@ class UserSeeder extends Seeder
        'email_verified_at' => now(),
        'password' => bcrypt('123456'), // password
        'remember_token' => Str::random(5),
-       'account' => 'author'
+       'account' => 'author',
+       'premium' => 1
 
       ]);
 

@@ -19,10 +19,8 @@ class CreateCategoryPostTable extends Migration
           $table->integer('category_id')->unsigned();
           $table->integer('post_id')->unsigned();
 
-          $table->unique(['category_id', 'post_id']);
-
-          $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
-          $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
+          $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade');
+          $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade');
 
           $table->timestamps();
         });

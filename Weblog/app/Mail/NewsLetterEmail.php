@@ -11,14 +11,16 @@ class NewsLetterEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $latestNews;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($latestNews)
     {
-        //
+      $this->latestNews = $latestNews 
     }
 
     /**

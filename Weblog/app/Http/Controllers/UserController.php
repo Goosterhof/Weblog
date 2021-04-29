@@ -35,8 +35,6 @@ class UserController extends Controller
     return redirect()->back()->with('success', 'Account successfully updated!');
   }
 
-
-
   public function pay(UserPremiumRequest $request, \App\Models\User $user)
   {
     User::where('id', Auth::user()->id)->first()->update( [
@@ -44,9 +42,6 @@ class UserController extends Controller
     ]);
    return redirect()->route('dashboard.index')->with('success', 'You have a subscription to premium now');
   }
-
-
-
 
   public function unsubscribe(UserUnsubscribeRequest $request, \App\Models\User $user)
   {
@@ -56,10 +51,7 @@ class UserController extends Controller
     return redirect()->back()->with('success', 'Unsubscribed!');
   }
 
-
-
-
-  public function pass(UserPassRequest $request, \App\Models\User $user)
+ public function pass(UserPassRequest $request, \App\Models\User $user)
   {
     $request->user()->update([
         'password' => Hash::make($request->new_password)

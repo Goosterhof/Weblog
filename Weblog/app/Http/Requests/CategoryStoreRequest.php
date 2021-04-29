@@ -24,7 +24,7 @@ class CategoryStoreRequest extends FormRequest
     public function rules()
     {
       return [
-        'name' => 'sometimes|required',
+        'name' => 'required',
       ];
     }
 
@@ -35,6 +35,8 @@ class CategoryStoreRequest extends FormRequest
      */
     public function messages()
     {
-        return [];
+        return [
+          'name.required' => 'Error category name is required'
+        ];
     }
 }

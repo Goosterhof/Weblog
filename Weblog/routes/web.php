@@ -39,12 +39,9 @@ $router->group(['middleware' => ['premium']], function() {
   Route::get('/post/{post}', [PostController::class,'show'])->name('post.show');
 
   // filter
-  Route::get('/post/{search}', [FilterController::class,'search'])->name('filter.search');
-  Route::get('/post/{order}', [FilterController::class,'order'])->name('filter.order');
-  Route::get('/post/{category}', [FilterController::class,'category'])->name('filter.category');
-
-
-
+  Route::get('/post/search/{id}', [FilterController::class,'search'])->name('filter.search');
+  Route::get('/post/order/{id}', [FilterController::class,'order'])->name('filter.order');
+  Route::get('/post/category/{id}', [FilterController::class,'category'])->name('filter.category');
 
   // routes for Category.
   Route::get('/categories', [CategoryController::class,'index'])->name('category.index');
@@ -53,7 +50,6 @@ $router->group(['middleware' => ['premium']], function() {
   // routes for comments.
   Route::post('/post', [CommentController::class, 'store'])->name('comment.store');
   Route::delete('/post', [CommentController::class, 'destroy'])->name('comment.destroy');
-
 });
 
 

@@ -18,7 +18,8 @@ class Comment extends Model
       'id',
       'title',
       'body',
-      'post_id'
+      'post_id',
+      'user_id'
     ];
 
 

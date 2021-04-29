@@ -24,9 +24,9 @@ class UserPassRequest extends FormRequest
     public function rules()
     {
       return [
-        'token' => 'sometimes|required',
-        'password' => 'sometimes|required',
-        'new_password' => 'sometimes|required',
+        'token' => 'required',
+        'password' => 'required',
+        'new_password' => 'required',
       ];
     }
     /**

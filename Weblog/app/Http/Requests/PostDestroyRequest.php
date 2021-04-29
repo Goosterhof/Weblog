@@ -23,7 +23,9 @@ class PostDestroyRequest extends FormRequest
      */
     public function rules()
     {
-      return [];
+      return [
+        'id'  => 'required',
+      ];
     }
     /**
      * Get the error messages for the defined validation rules.
@@ -32,6 +34,8 @@ class PostDestroyRequest extends FormRequest
      */
     public function messages()
     {
-        return [];
+        return [
+          'id.required' => 'Error id is required!'
+        ];
     }
 }

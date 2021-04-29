@@ -36,17 +36,23 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request)
     {
-      Category::create($validated = $request->validated());
+      Category::create([
+        'name' => $request->input('name'),
+      ]);
       return redirect()->back()->with('success', 'Category added succesfully!');
     }
+
     public function update(CategoryUpdateRequest $request, \App\Models\Category $cat)
     {
       $cat->update($validated = $request->validated());
       return redirect()->back()->with('success', 'Category changed succesfully!');
     }
+
     public function destroy(CategoryDestroyRequest $request, \App\Models\Category $cat)
     {
+      $cat->posts()->detach();
       $cat->delete($validated = $request->validated());
+
       return redirect()->back()->with('success', 'Category successfully removed!');
     }
 }

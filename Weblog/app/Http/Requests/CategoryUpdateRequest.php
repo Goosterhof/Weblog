@@ -24,7 +24,8 @@ class CategoryUpdateRequest extends FormRequest
     public function rules()
     {
       return [
-        'name' => 'sometimes|required',
+        'name'  => 'required',
+
       ];
     }
     /**
@@ -34,6 +35,8 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function messages()
     {
-        return [];
+        return [
+          'name.required' => 'Error name is required!'
+        ];
     }
 }

@@ -24,11 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      $newsUser = \App\Models\User::all()->where('newsletter', '1');
-
-      foreach ($newsUser as $user) {
-          $schedule->job(new \App\Mail\NewsLetterEmail($user))->everyFiveMinutes();
-      }
+      // $newsUser = \App\Models\User::all()->where('newsletter', '1');
+      //
+      // foreach ($newsUser as $user) {
+      //     $schedule->job(new \App\Mail\NewsLetterEmail($user))->everyFiveMinutes();
+      // }
     }
 
     /**

@@ -12,21 +12,20 @@ class PostController extends Controller
 {
     public function index(Request $request, \App\Models\Post $post)
     {
-
       $premium = Post::when( Auth::check() && Auth::user()->premium,
         function () {
           if (true) {
             return Post::where('is_premium', '1')->get();
           }
         });
-
-      return view('posts', [
+        return view('posts', [
           'post' => Post::where('is_premium', '0')->latest()->paginate(10),
           'premium' => $premium,
           'category' => Category::latest()->get(),
-          'cat_name' => Category::where('id', request('cat'))->first(), // for the naminng of the query.
           'user' => User::where('id', $post->user_id)->get(),
-      ]);
+          'cat_name' => Category::where('id', request('cat'))->first(), // for the naminng of the query.
+        ]);
+
     }
 
     // frondend layout
@@ -64,6 +63,12 @@ class PostController extends Controller
         ]);
     }
 
+
+
+
+
+
+
     public function store(PostStoreRequest $request, \App\Models\Post $post)
     {
         $imagePath = str_replace(' ', '', $request->slug) . '-' . time() . '.' . $request->image->extension();
@@ -86,9 +91,21 @@ class PostController extends Controller
         return redirect()->route('post.show', Post::latest()->first());
     }
 
+
+
+
+
     public function update(PostUpdateRequest $request, \App\Models\Post $post)
     {
-        Post::where('id', $request->input('post_id'))
+      if($request->file != ''){
+        $imagePath = str_replace(' ', '', $request->slug) . '-' . time() . '.' . $request->image->extension();
+        $imageName = str_replace(' ', '', $request->slug) . '-' . time();
+        $request->image->move(public_path('images'), $imagePath);
+      }
+
+      $post->categories()->detach();
+
+      Post::where('id', $request->input('post_id'))
             ->first()
             ->update([
                 'title' => $request->input('title'),
@@ -98,14 +115,19 @@ class PostController extends Controller
                 'is_premium' => $request->input('is_premium'),
             ]);
 
-        $post->categories()->sync($request->input('categories'));
+      $post->categories()->sync($request->input('categories'));
 
-        return redirect()->route('post.show', Post::latest()->first());
+      return redirect()->route('post.show', Post::latest()->first());
     }
+
+
+
 
     public function destroy(PostDestroyRequest $request, \App\Models\Post $post)
     {
-        $post->delete($validated = $request->validated());
+      $post->categories()->detach();
+      $post->delete($validated = $request->validated());
+
         return redirect()
             ->back()
             ->with('success', 'Post successfully removed!');

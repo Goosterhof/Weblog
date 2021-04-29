@@ -23,7 +23,9 @@ class CategoryDestroyRequest extends FormRequest
      */
     public function rules()
     {
-      return [];
+      return [
+        'id'  => 'required',
+      ];
     }
 
     /**
@@ -33,6 +35,9 @@ class CategoryDestroyRequest extends FormRequest
      */
     public function messages()
     {
-        return [];
+        return [
+
+
+        ];
     }
 }

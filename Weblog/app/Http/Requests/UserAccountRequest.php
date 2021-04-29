@@ -24,10 +24,10 @@ class UserAccountRequest extends FormRequest
     public function rules()
     {
       return [
-        'name' => 'sometimes|required',
-        'bio' => 'sometimes|required',
-        'email' => 'sometimes|required',
-        'newsletter' => 'sometimes|required',
+        'name' => 'required',
+        'bio' => 'required',
+        'email' => 'required',
+        'newsletter' => 'required',
       ];
     }
     /**
