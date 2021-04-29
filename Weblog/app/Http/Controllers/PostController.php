@@ -63,12 +63,6 @@ class PostController extends Controller
         ]);
     }
 
-
-
-
-
-
-
     public function store(PostStoreRequest $request, \App\Models\Post $post)
     {
         $imagePath = str_replace(' ', '', $request->slug) . '-' . time() . '.' . $request->image->extension();
@@ -90,10 +84,6 @@ class PostController extends Controller
 
         return redirect()->route('post.show', Post::latest()->first());
     }
-
-
-
-
 
     public function update(PostUpdateRequest $request, \App\Models\Post $post)
     {
@@ -120,11 +110,15 @@ class PostController extends Controller
       return redirect()->route('post.show', Post::latest()->first());
     }
 
-
-
-
     public function destroy(PostDestroyRequest $request, \App\Models\Post $post)
     {
+
+      $imagePath = $post->media_path;
+
+      if(file::exists(public_path('images/' . $imagePath))) {
+        file::delete(public_path('images/' . $imagePath));
+      }
+
       $post->categories()->detach();
       $post->delete($validated = $request->validated());
 

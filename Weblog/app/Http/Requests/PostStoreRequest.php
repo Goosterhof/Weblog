@@ -28,7 +28,8 @@ class PostStoreRequest extends FormRequest
         'body' => 'required',
         'slug' => 'required',
         'user_id' => 'required',
-        'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'sometimes|required',
+        'image*' => 'mimes:jpeg,jpg,png|max:8048',
         'categories' => 'required|min:1',
         'is_premium' => 'required'
 
@@ -47,7 +48,8 @@ class PostStoreRequest extends FormRequest
           'title.required' => 'A title is required',
           'body.required' => 'A message is required',
           'slug.required' => 'A slug is required',
-          'image_update.required' => 'Image must be jpeg, jpg or png.',
+          'image.required' => 'Image must be jpeg, jpg or png.',
+
           'categories.required' => 'atleast one category required',
         ];
     }

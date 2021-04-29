@@ -37,7 +37,7 @@ margin-left: 5px;
 		<ul class="pr-1">
 			<li class="list-group">
 				@foreach ($user_post as $key)
-					<a class="p-2 link-secondary" href="{{route('post.show', $key->id)}}">{{ $key->title }}</a>
+					<a class="link-secondary" href="{{route('post.show', $key->id)}}">{{ $key->title }}</a>
 					@endforeach
 			</li>
 		</ul>
@@ -47,7 +47,7 @@ margin-left: 5px;
 		<ul class="pr-1">
 			<li class="list-group">
 				@foreach ($post->categories as $key)
-					<a class="p-2 link-secondary" href="{{ route('category.show', ['id' => $key->id] ) }}">{{ $key->name }}</a>
+					<a class="link-secondary" href="{{ route('category.show', ['id' => $key->id] ) }}">{{ $key->name }}</a>
 				@endforeach
 			</li>
 		</ul>

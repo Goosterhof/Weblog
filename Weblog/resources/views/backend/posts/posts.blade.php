@@ -57,7 +57,7 @@
       </div>
       <p class="blog-post-meta">{{ $key->created_at }} by <a href="#">{{ $user->name }}</a></p>
       <p>{!!  substr(strip_tags($key->body), 0, 950) !!}</p>
-      <p class=""><a href="/post/{{$key->id}}" class="fw-bold">Continue reading...</a></p>
+      <p class=""><a href="{{route('post.show', $key->id)}}" class="fw-bold">Continue reading...</a></p>
       <hr>
    </article>
    @empty

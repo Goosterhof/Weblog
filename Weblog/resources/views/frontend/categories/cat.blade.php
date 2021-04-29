@@ -40,7 +40,6 @@
       </article><!-- /.blog-post -->
       <hr>
       @empty
-      <p>empty</p>
 
     @endforelse
 

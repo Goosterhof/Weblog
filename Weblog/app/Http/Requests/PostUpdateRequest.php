@@ -28,7 +28,8 @@ class PostUpdateRequest extends FormRequest
         'body' => 'required',
         'slug' => 'required',
         'user_id' => 'required',
-        'image_update' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image_update' => 'sometimes|required',
+        'image_update*' => 'mimes:jpeg,jpg,png,gif,csv,txt,xlx,xls,pdf|max:2048',
         'categories' => 'required|min:1',
         'is_premium' => 'required',
       ];

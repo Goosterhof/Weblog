@@ -24,8 +24,8 @@ class CreatePostsTable extends Migration
         $table->string('slug');
 
         // for media
-        $table->string('media_name')->onUpdate('cascade')->onDelete('cascade');
-        $table->string('media_path')->onUpdate('cascade')->onDelete('cascade');
+        $table->string('media_name')->nullable();
+        $table->string('media_path')->nullable();
 
         $table->boolean('is_premium')->default(0);
 

@@ -52,7 +52,6 @@ class CategoryController extends Controller
     {
       $cat->posts()->detach();
       $cat->delete($validated = $request->validated());
-
       return redirect()->back()->with('success', 'Category successfully removed!');
     }
 }

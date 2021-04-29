@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     UserController,
     FilterController
   };
+use App\Mail\NewsLetterEmail;
 use App\Http\Middleware\{Authenticate, AuthorMiddleware, PremiumMiddleware};
 
 /*
@@ -27,6 +28,11 @@ require __DIR__.'/auth.php';
 
 // routes for home.
 Route::get('', [HomeController::class,'index'])->name('home.index');
+
+
+Route::get('/newsletter', function (){
+  return new NewsLetterEmail();
+});
 
 
 

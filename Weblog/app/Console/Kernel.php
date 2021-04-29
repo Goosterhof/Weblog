@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+      \App\Console\Commands\Newsletter::class,
     ];
 
     /**
@@ -24,11 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      // $newsUser = \App\Models\User::all()->where('newsletter', '1');
-      //
-      // foreach ($newsUser as $user) {
-      //     $schedule->job(new \App\Mail\NewsLetterEmail($user))->everyFiveMinutes();
-      // }
+      $schedule->command(\App\Console\Commands\Newsletter::class)->weekly();
     }
 
     /**
