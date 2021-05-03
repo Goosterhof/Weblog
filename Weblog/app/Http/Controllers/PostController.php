@@ -14,6 +14,7 @@ class PostController extends Controller
     {
       $premium = Post::when( Auth::check() && Auth::user()->premium,
         function () {
+            // TODO ::  if (true)? no need for that, cause it's always true
           if (true) {
             return Post::where('is_premium', '1')->get();
           }
@@ -31,11 +32,13 @@ class PostController extends Controller
     // frondend layout
     public function show(Request $request, $id)
     {
+    //    TODO :: use route model binding: https://laravel.com/docs/8.x/routing#route-model-binding
         $post = Post::where('id', $id)->first();
         $user = User::where('id', $post->user_id)->first();
 
         return view('frontend.posts.post', [
             'post' => $post,
+            // TODO :: don't query the same thing twice
             'user' => User::where('id', $post->user_id)->get(),
             'comment' => Comment::where('post_id', $id)->get(),
             'user_post' => $user->posts()->get(),
@@ -54,6 +57,7 @@ class PostController extends Controller
 
     public function edit(Request $request, $id)
     {
+    //    TODO :: use route model binding: https://laravel.com/docs/8.x/routing#route-model-binding
         $post = Post::where('id', $id)->first();
 
         return view('backend.posts.edit', [
@@ -93,8 +97,10 @@ class PostController extends Controller
         $request->image->move(public_path('images'), $imagePath);
       }
 
+    //   TODO :: no need for detach when you use sync
       $post->categories()->detach();
 
+    //    TODO :: use $post
       Post::where('id', $request->input('post_id'))
             ->first()
             ->update([
@@ -120,6 +126,7 @@ class PostController extends Controller
       }
 
       $post->categories()->detach();
+        // TODO :: no need for validated =
       $post->delete($validated = $request->validated());
 
         return redirect()

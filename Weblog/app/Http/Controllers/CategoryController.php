@@ -20,6 +20,8 @@ class CategoryController extends Controller
    }
    public function show(Request $request)
    {
+    //    TODO :: use route model binding: https://laravel.com/docs/8.x/routing#route-model-binding
+    // like you use in the update and destroy method
      if ( $request->query('id') ) {
        return view('frontend.categories.cat', [
          'category' => Category::where('id', $request->query('id'))->first(),
@@ -36,6 +38,7 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request)
     {
+        // TODO :: can use $request->validated() like you use in update
       Category::create([
         'name' => $request->input('name'),
       ]);
@@ -44,6 +47,7 @@ class CategoryController extends Controller
 
     public function update(CategoryUpdateRequest $request, \App\Models\Category $cat)
     {
+        // TODO :: no need for validated =
       $cat->update($validated = $request->validated());
       return redirect()->back()->with('success', 'Category changed succesfully!');
     }
@@ -51,6 +55,7 @@ class CategoryController extends Controller
     public function destroy(CategoryDestroyRequest $request, \App\Models\Category $cat)
     {
       $cat->posts()->detach();
+        // TODO :: no need for validated =
       $cat->delete($validated = $request->validated());
       return redirect()->back()->with('success', 'Category successfully removed!');
     }

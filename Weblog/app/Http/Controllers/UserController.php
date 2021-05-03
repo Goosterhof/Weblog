@@ -26,6 +26,7 @@ class UserController extends Controller
   }
   public function account(UserAccountRequest $request, \App\Models\User $user)
   {
+    //   TODO :: use Auth::user() to be consistent
     $request->user()->update([
       'name' => $request->input('name'),
       'email' => $request->input('email'),
@@ -37,6 +38,7 @@ class UserController extends Controller
 
   public function pay(UserPremiumRequest $request, \App\Models\User $user)
   {
+    //   TODO :: use Auth::user() to be consistent
     User::where('id', Auth::user()->id)->first()->update( [
       'premium' => $request->input('premium')
     ]);
@@ -45,6 +47,7 @@ class UserController extends Controller
 
   public function unsubscribe(UserUnsubscribeRequest $request, \App\Models\User $user)
   {
+    //   TODO :: use Auth::user() to be consistent
     User::where('id', Auth::user()->id)->first()->update( [
       'premium' => $request->input('unsubscribe')
     ]);
@@ -53,6 +56,7 @@ class UserController extends Controller
 
  public function pass(UserPassRequest $request, \App\Models\User $user)
   {
+    //   TODO :: use Auth::user() to be consistent
     $request->user()->update([
         'password' => Hash::make($request->new_password)
     ]);
@@ -62,6 +66,7 @@ class UserController extends Controller
 
   public function destroy(UserDestroyRequest $request, \App\Models\User $user)
   {
+        // TODO :: no need for validated =
     $user->delete($validated = $request->validated());
     return redirect()->welcome()->with('success', 'Account successfully removed!');
   }
